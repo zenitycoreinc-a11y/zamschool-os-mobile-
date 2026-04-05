@@ -1,0 +1,74 @@
+{
+  "expo": {
+    "name": "zamschool os",
+    "slug": "zamschool-os",
+    "scheme": "zamschoolos",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "icon": "./assets/icon.png",
+    "userInterfaceStyle": "light",
+    "splash": {
+      "image": "./assets/splash-icon.png",
+      "resizeMode": "contain",
+      "backgroundColor": "#ffffff"
+    },
+    "ios": {
+      "supportsTablet": true,
+      "bundleIdentifier": "com.isonmumbunasorganization.zamschoolos",
+      "infoPlist": {
+        "ITSAppUsesNonExemptEncryption": false
+      }
+    },
+    "android": {
+      "versionCode": 1,
+      "permissions": [
+        "POST_NOTIFICATIONS"
+      ],
+      "adaptiveIcon": {
+        "backgroundColor": "#E6F4FE",
+        "foregroundImage": "./assets/android-icon-foreground.png",
+        "backgroundImage": "./assets/android-icon-background.png",
+        "monochromeImage": "./assets/android-icon-monochrome.png"
+      },
+      "intentFilters": [
+        {
+          "action": "VIEW",
+          "category": [
+            "BROWSABLE",
+            "DEFAULT"
+          ],
+          "data": [
+            {
+              "scheme": "zamschoolos",
+              "host": "auth"
+            }
+          ]
+        }
+      ],
+      "package": "com.isonmumbunasorganization.zamschoolos"
+    },
+    "plugins": [
+      [
+        "expo-notifications",
+        {
+          "defaultChannel": "default"
+        }
+      ]
+    ],
+    "extra": {
+      "router": {
+        "origin": "https://3000-cf8c1125-a680-48cf-bd60-e6c9caa973a1.orchids.cloud",
+        "headOrigin": "https://3000-cf8c1125-a680-48cf-bd60-e6c9caa973a1.orchids.cloud",
+        "previewOrigin": "https://3000-cf8c1125-a680-48cf-bd60-e6c9caa973a1.orchids.cloud",
+        "localOrigin": "http://localhost:3000"
+      },
+      "eas": {
+        "projectId": "15f74bde-d4a5-4db4-b21a-8b7659b7479e"
+      }
+    },
+    "web": {
+      "favicon": "./assets/favicon.png"
+    },
+    "owner": "isonmumbunas-organization"
+  }
+}

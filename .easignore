@@ -1,0 +1,87 @@
+# dependencies
+node_modules/
+
+# Expo
+.expo/
+dist/
+web-build/
+expo-env.d.ts
+
+# Native
+.kotlin/
+*.orig.*
+*.jks
+*.p8
+*.p12
+*.key
+*.mobileprovision
+
+# Metro
+.metro-health-check*
+
+# debug
+npm-debug.*
+yarn-debug.*
+yarn-error.*
+
+# macOS
+.DS_Store
+*.pem
+
+# local env files
+.env
+.env.local
+.env.*.local
+
+# typescript
+*.tsbuildinfo
+
+# generated native folders
+/ios
+/android
+
+# local git worktrees
+.worktrees/
+
+# editor state
+.vscode/
+
+# local workspace artifacts
+.orchids/
+.cursor/
+.qoder/
+.superpowers/
+
+# local run artifacts
+*.log
+*.out
+*.bundle
+.expo-native.log
+.expo-web.log
+.expo-clean.log
+/expo-*.png
+/expo-*.xml
+/latest-phone-screen*.png
+/localhost-*.log
+/phone-*.png
+/post_fix_*.png
+/post_fix_*.xml
+/prank_dump.xml
+/relaunch*.png
+/student_*.png
+/student_*.xml
+/wa_dump.xml
+/window_dump*.xml
+/zam-shell.xml
+/zam-ui-check*.png
+
+# unrelated projects and docs
+/webapp/
+/docs/
+/.github/
+/Expo-Go-55.0.5.apk
+/expo-go-page.html
+/device-current.png
+/uidump*.xml
+/zam-*.xml
+/playstore.xml
