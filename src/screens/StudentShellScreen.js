@@ -16,10 +16,12 @@ import { EmptyState } from '../components/ui/EmptyState';
 import { ErrorBanner } from '../components/ui/ErrorBanner';
 import { LoadingState } from '../components/ui/LoadingState';
 import { StudentAnnouncementsScreen } from './student/StudentAnnouncementsScreen';
+import { StudentAssignmentsScreen } from './student/StudentAssignmentsScreen';
 import { StudentAttendanceScreen } from './student/StudentAttendanceScreen';
 import { StudentMessagesScreen } from './student/StudentMessagesScreen';
 import { StudentNotificationsScreen } from './student/StudentNotificationsScreen';
 import { StudentProfileScreen } from './student/StudentProfileScreen';
+import { StudentResultsScreen } from './student/StudentResultsScreen';
 import { studentBottomTabs, studentDrawerItems } from './student/navigationConfig.js';
 import { splitMetricCardProps } from './student/metricCardProps';
 import { CACHED_STUDENT_TABS, getMountedStudentTabs, rememberStudentTab } from './student/studentTabMounting.js';
@@ -192,6 +194,7 @@ export function StudentShellScreen({ profile, onSignedOut }) {
   const [profileOverrides, setProfileOverrides] = useState({});
 
   const cachedDashboard = peekStudentDashboard();
+  const currentSummary = peekStudentResultsSummary(50) || { average: null, rows: [] };
   const {
     data: dashboard,
     error: dashboardError,
@@ -217,7 +220,19 @@ export function StudentShellScreen({ profile, onSignedOut }) {
     avatarUrl: profileOverrides.avatarUrl ?? profile?.avatarUrl ?? null,
   }), [profileOverrides, dashboard, profile]);
 
+  useEffect(() => {
+    setVisitedTabs((current) => rememberStudentTab(current, activeTab));
+  }, [activeTab]);
+
+  const mountedTabs = useMemo(() => getMountedStudentTabs(activeTab, visitedTabs), [activeTab, visitedTabs]);
+
+  const primaryTabKey = CACHED_STUDENT_TABS.includes(activeTab) ? activeTab : 'home';
+
+  // value: currentSummary.average == null ? '--' : `${currentSummary.average}%`,
+
   const renderTab = (tab) => {
+    if (dashboardLoading && !dashboard) return <LoadingState />;
+    if (isLoading) return <LoadingState />;
     switch (tab) {
       case 'home':
         return (
@@ -237,6 +252,14 @@ export function StudentShellScreen({ profile, onSignedOut }) {
         return <StudentAttendanceScreen />;
       case 'announcements':
         return <StudentAnnouncementsScreen />;
+      case 'assignments':
+        return <StudentAssignmentsScreen />;
+      case 'results':
+        return <StudentResultsScreen currentSummary={currentSummary} />;
+      case 'messages':
+        return <StudentMessagesScreen />;
+      case 'notifications':
+        return <StudentNotificationsScreen />;
       default:
         return <LoadingState />;
     }
@@ -256,11 +279,19 @@ export function StudentShellScreen({ profile, onSignedOut }) {
         bottomTabs={studentBottomTabs}
       >
         <View style={styles.tabContent}>
-          {visitedTabs.map(tab => (
-            <View key={tab} style={[styles.tabPane, { display: activeTab === tab ? 'flex' : 'none' }]}>
-              {renderTab(tab)}
-            </View>
-          ))}
+          {mountedTabs.map((tab) => {
+            const isActive = activeTab === tab;
+            return (
+              <View
+                key={tab}
+                style={[styles.tabPane, { display: isActive ? 'flex' : 'none' }]}
+                pointerEvents={isActive ? 'auto' : 'none'}
+                importantForAccessibility={isActive ? 'auto' : 'no-hide-descendants'}
+              >
+                {renderTab(tab)}
+              </View>
+            );
+          })}
         </View>
       </PremiumShell>
     </View>
