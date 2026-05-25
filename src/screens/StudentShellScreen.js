@@ -36,9 +36,10 @@ import {
 } from '../services/studentDashboardService.js';
 import { useAsyncResource } from '../hooks/useAsyncResource';
 import { formatDate } from '../utils/date';
-import { colors, radii, shadows, spacing } from '../theme';
+import { colors, getRolePalette, radii, shadows, spacing } from '../theme';
 import { useDashboardTheme } from '../dashboardTheme';
 
+const STUDENT = getRolePalette('student');
 const CONTENT_BOTTOM_PADDING = spacing.xl + 40;
 const ROUTE_TO_TAB = {
   home: 'home',
@@ -135,7 +136,7 @@ const HomeDashboard = memo(({
       {dashboardError ? <ErrorBanner message={dashboardError} onRetry={reloadDashboard} /> : null}
 
       <View style={styles.heroSection}>
-        <LinearGradient colors={[colors.primary, colors.primaryStrong]} style={styles.heroGradient}>
+        <LinearGradient colors={[STUDENT.accent, STUDENT.accentStrong]} style={styles.heroGradient}>
           <Text style={styles.heroGreeting}>Welcome back,</Text>
           <Text style={styles.heroName}>{currentDashboard.profile.displayName}</Text>
           <Text style={styles.heroClass}>{currentDashboard.profile.classLabel}</Text>
@@ -157,8 +158,8 @@ const HomeDashboard = memo(({
           value={currentDashboard.metrics.assignments.value}
           note={currentDashboard.metrics.assignments.note}
           icon="document-text-outline"
-          accentColor={colors.warningStrong}
-          tintColor={colors.warningSoft}
+          accentColor={STUDENT.accentStrong}
+          tintColor={STUDENT.accentSoft}
           onPress={() => onNavigate('assignments')}
         />
       </View>
@@ -175,7 +176,7 @@ const HomeDashboard = memo(({
               submeta={`${lesson.teacherName} • ${lesson.room}`}
               statusLabel={lesson.isCurrent ? 'Now' : 'Upcoming'}
               icon="time-outline"
-              accentColor={lesson.isCurrent ? colors.primary : colors.primarySoft}
+              accentColor={lesson.isCurrent ? STUDENT.accent : STUDENT.accentSoft}
               onPress={() => onNavigate('schedule')}
             />
           ))
@@ -268,7 +269,7 @@ export function StudentShellScreen({ profile, onSignedOut }) {
 }
 
 const styles = StyleSheet.create({
-  container: { flex: 1, backgroundColor: colors.bg },
+  container: { flex: 1, backgroundColor: STUDENT.bg },
   tabContent: { flex: 1 },
   tabPane: { flex: 1 },
   content: { paddingBottom: CONTENT_BOTTOM_PADDING },
@@ -286,12 +287,12 @@ const styles = StyleSheet.create({
   sectionHeader: { flexDirection: 'row', alignItems: 'center', marginBottom: spacing.md },
   sectionTitle: { fontSize: 18, fontWeight: 'bold', color: colors.textPrimary },
   sectionAction: { padding: 4 },
-  sectionActionText: { color: colors.primary, fontWeight: '600' },
+  sectionActionText: { color: STUDENT.accent, fontWeight: '600' },
   timelineCard: { flexDirection: 'row', alignItems: 'center', padding: spacing.md, backgroundColor: colors.surface, borderRadius: radii.md, marginBottom: spacing.sm },
   timelineIconWrap: { width: 40, height: 40, borderRadius: 20, alignItems: 'center', justifyContent: 'center', marginRight: spacing.md },
   timelineCopy: { flex: 1 },
   rowTitle: { fontSize: 16, fontWeight: '600', color: colors.textPrimary },
   rowMeta: { fontSize: 13, color: colors.textSecondary, marginTop: 2 },
-  rowStatus: { paddingHorizontal: 8, paddingVertical: 4, borderRadius: 4, backgroundColor: colors.bg },
-  rowStatusText: { fontSize: 11, color: colors.primary, fontWeight: 'bold' },
+  rowStatus: { paddingHorizontal: 8, paddingVertical: 4, borderRadius: 4, backgroundColor: STUDENT.bg },
+  rowStatusText: { fontSize: 11, color: STUDENT.accent, fontWeight: 'bold' },
 });

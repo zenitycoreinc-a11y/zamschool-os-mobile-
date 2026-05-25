@@ -211,7 +211,7 @@ export function TeacherDashboardScreen({ profile, onNavigate }) {
 }
 
 const styles = StyleSheet.create({
-  root: { flex: 1, backgroundColor: colors.bgSoft },
+  root: { flex: 1, backgroundColor: TEACHER.bg },
   header: { paddingHorizontal: 20, gap: 10 },
   headerTop: { flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between' },
   greeting: { fontSize: 14, fontWeight: '400', color: 'rgba(255,255,255,0.75)' },

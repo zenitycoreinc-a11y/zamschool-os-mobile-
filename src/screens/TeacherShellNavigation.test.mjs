@@ -18,5 +18,5 @@ test("teacher shell keeps primary tabs warm and renders mounted tab surfaces laz
   assert.equal(source.includes("rememberRoleTab(current, tab, primaryTabs)"), true);
   assert.equal(source.includes("getMountedRoleTabs(tab, visitedTabs, primaryTabs)"), true);
   assert.equal(source.includes("mountedTabs.map((mountedTab) =>"), true);
-  assert.equal(source.includes("importantForAccessibility={isActive ? 'auto' : 'no-hide-descendants'}"), true);
+  assert.equal(source.includes("isActive ? 'auto' : 'none'"), true);
 });
