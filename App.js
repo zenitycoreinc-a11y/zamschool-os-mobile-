@@ -242,7 +242,11 @@ export default function App() {
         appContent = (
           <AppSurface statusBarStyle="light" gradientColors={shellGradientColors}>
             <DashboardThemeProvider>
-              {isSupportedRole && RoleShell ? <RoleShell profile={profile} /> : <UnsupportedRoleScreen profile={profile} />}
+              {isSupportedRole && RoleShell ? (
+                <RoleShell profile={profile} onSignedOut={refreshProfile} />
+              ) : (
+                <UnsupportedRoleScreen profile={profile} onSignedOut={refreshProfile} />
+              )}
             </DashboardThemeProvider>
           </AppSurface>
         );
