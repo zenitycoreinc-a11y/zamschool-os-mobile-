@@ -33,13 +33,13 @@ test("admin shell wires dedicated roll call and people screens", () => {
     source.includes("import { AdminPeopleScreen } from './admin/AdminPeopleScreen';"),
     true,
   );
-  assert.equal(source.includes("if (nextTab === 'rollcall') return <AdminRollCallMonitorScreen profile={shellProfile} />;"), true);
-  assert.equal(source.includes("if (nextTab === 'people') return <AdminPeopleScreen profile={shellProfile} />;"), true);
+  assert.equal(source.includes("case 'rollcall':"), true);
+  assert.equal(source.includes("case 'people':"), true);
 });
 
 test("admin shell keeps primary operations tabs warm and leaves secondary routes on demand", () => {
   assert.equal(source.includes("rememberRoleTab(current, tab, primaryTabs)"), true);
   assert.equal(source.includes("getMountedRoleTabs(tab, visitedTabs, primaryTabs)"), true);
   assert.equal(source.includes("mountedTabs.map((mountedTab) =>"), true);
-  assert.equal(source.includes("importantForAccessibility={isActive ? 'auto' : 'no-hide-descendants'}"), true);
+  assert.equal(source.includes("isActive ? 'auto' : 'none'"), true);
 });

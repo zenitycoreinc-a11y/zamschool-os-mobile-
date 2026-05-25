@@ -1,9 +1,11 @@
 import { StyleSheet, Text, View } from 'react-native';
 import { AppLayout } from '../components/AppLayout';
-import { colors, spacing } from '../theme';
+import { colors, getRolePalette, spacing } from '../theme';
 import { Button } from '../components/Button';
 import { signOut } from '../services/authService';
 import { getRolePolicy } from '../config/roleCapabilities';
+
+const PAYMENTS = getRolePalette('payments');
 
 export function PaymentsShellScreen({ profile, onSignedOut }) {
   const paymentsPolicy = getRolePolicy('payments');
@@ -35,12 +37,12 @@ export function PaymentsShellScreen({ profile, onSignedOut }) {
 
 const styles = StyleSheet.create({
   card: {
-    backgroundColor: colors.card,
+    backgroundColor: PAYMENTS.surfaceRaised,
     borderRadius: 16,
     padding: spacing.lg,
     gap: spacing.sm,
     borderWidth: 1,
-    borderColor: colors.border,
+    borderColor: PAYMENTS.border,
   },
   heading: {
     color: colors.text,
@@ -52,7 +54,7 @@ const styles = StyleSheet.create({
     fontSize: 14,
   },
   meta: {
-    color: colors.muted,
+    color: PAYMENTS.muted,
     fontSize: 13,
   },
 });

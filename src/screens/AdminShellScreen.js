@@ -67,6 +67,19 @@ const MemoizedAdminRollCall = memo(AdminRollCallMonitorScreen);
 const MemoizedAdminPeople = memo(AdminPeopleScreen);
 const MemoizedAdminAnnouncements = memo(AdminAnnouncementsScreen);
 
+function AdminManagementHoldingScreen() {
+  return (
+    <ScrollView contentContainerStyle={styles.content}>
+      <EmptyState
+        icon="link"
+        title="Relationship Management"
+        message="Relationship management stays web-first while the mobile admin operations view is being rebuilt."
+        supportingTone="info"
+      />
+    </ScrollView>
+  );
+}
+
 const MemoizedAdminProfile = memo(({ profile, onSignedOut, onNavigate, onProfileUpdated }) => {
   const { data, error, isLoading, load } = useAsyncResource(
     useCallback(async () => getAdminOverviewCounts(), []),
@@ -222,6 +235,8 @@ export function AdminShellScreen({ profile, onSignedOut }) {
             emptyMessage="Admin alerts will appear here when there is activity that needs review."
           />
         );
+      case 'management':
+        return <AdminManagementHoldingScreen />;
       case 'announcements':
         return <MemoizedAdminAnnouncements profile={shellProfile} onSignedOut={onSignedOut} />;
       case 'profile':
@@ -272,7 +287,7 @@ export function AdminShellScreen({ profile, onSignedOut }) {
 }
 
 const styles = StyleSheet.create({
-  container: { flex: 1, backgroundColor: colors.bg },
+  container: { flex: 1, backgroundColor: ADMIN.bg },
   content: { padding: 16, gap: 12, paddingBottom: 90 },
   card: {
     backgroundColor: colors.surfaceRaised,

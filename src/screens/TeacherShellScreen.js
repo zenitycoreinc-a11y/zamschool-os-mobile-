@@ -13,8 +13,10 @@ import { TeacherResultsScreen } from './teacher/TeacherResultsScreen';
 import { mergeTeacherPrewarmTabs } from './teacher/teacherShellPrewarm.js';
 import { RoleNotificationsScreen } from './shared/RoleNotificationsScreen';
 import { getMountedRoleTabs, rememberRoleTab } from './shared/roleShellTabMounting.js';
-import { colors } from '../theme';
+import { colors, getRolePalette } from '../theme';
 import { useDashboardTheme } from '../dashboardTheme';
+
+const TEACHER = getRolePalette('teacher');
 
 const bottomTabs = [
   { key: 'dashboard', label: 'Home', icon: 'home' },
@@ -171,7 +173,7 @@ export function TeacherShellScreen({ profile, onSignedOut }) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: colors.bg,
+    backgroundColor: TEACHER.bg,
   },
   tabDeck: {
     flex: 1,
